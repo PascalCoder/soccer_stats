@@ -1,4 +1,4 @@
-package com.example.soccerstats.view;
+package com.example.soccerstats.view.activities;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.Leagues;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText(Leagues.SERIE_A_TITLE));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        //tabLayout.clearOnTabSelectedListeners();
+
+        Toast.makeText(MainActivity.this, "Tab: " + tabLayout.getSelectedTabPosition() + " " + LEAGUE, Toast.LENGTH_SHORT).show();
+
         PagerAdapter mAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(mAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -56,12 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
                 if(tab.getPosition() == 0){
                     LEAGUE = Leagues.LIGA;
+                    Toast.makeText(MainActivity.this, "Tab: " + tab.getPosition() + " " + LEAGUE, Toast.LENGTH_SHORT).show();
                     POSITION = "1";
                 }else if (tab.getPosition() == 1){
                     LEAGUE = Leagues.PREMIER_LEAGUE;
+                    Toast.makeText(MainActivity.this, "Tab: " + tab.getPosition() + " " + LEAGUE, Toast.LENGTH_SHORT).show();
                     POSITION = "2";
                 }else{
                     LEAGUE = Leagues.SERIE_A;
+                    Toast.makeText(MainActivity.this, "Tab: " + tab.getPosition() + " " + LEAGUE, Toast.LENGTH_SHORT).show();
                     POSITION = "3";
                 }
             }

@@ -2,6 +2,7 @@ package com.example.soccerstats.view.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.standings.StandingList;
 import com.example.soccerstats.model.standings.StandingsData;
-import com.example.soccerstats.view.TeamDetailsActivity;
+import com.example.soccerstats.view.activities.TeamDetailsActivity;
 
 public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.CustomViewHolder>{
 
@@ -50,6 +51,11 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
         customViewHolder.tvTeamName.setText(dataSet.getStandings().get(position).getTeam());
         customViewHolder.tvPoints.setText("" + dataSet.getStandings().get(position).getOverall().getPoints());
         customViewHolder.tvGoalDiff.setText(goalDiffStr);
+        if(goalDiff > 0){
+            customViewHolder.tvGoalDiff.setTextColor(Color.rgb(0,133,119));
+        }else if(goalDiff < 0){
+            customViewHolder.tvGoalDiff.setTextColor(Color.RED);
+        }
 
         customViewHolder.tvId.setText(dataSet.getStandings().get(position).getTeamIdentifier());
 

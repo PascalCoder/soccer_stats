@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.soccerstats.model.Leagues;
-import com.example.soccerstats.view.MainActivity;
+import com.example.soccerstats.view.activities.MainActivity;
 import com.example.soccerstats.view.fragments.LigaFragment;
 import com.example.soccerstats.view.fragments.PremierLeagueFragment;
 import com.example.soccerstats.view.fragments.SerieAFragment;
@@ -24,12 +24,12 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position){
             case 0:
-                LigaFragment tab1 = LigaFragment.newInstance();
                 MainActivity.LEAGUE = Leagues.LIGA;
+                LigaFragment tab1 = LigaFragment.newInstance();
                 return tab1;
             case 1:
-                PremierLeagueFragment tab2 = PremierLeagueFragment.newInstance();
                 MainActivity.LEAGUE = Leagues.PREMIER_LEAGUE;
+                PremierLeagueFragment tab2 = PremierLeagueFragment.newInstance();
                 return tab2;
             case 2:
                 SerieAFragment tab3 = SerieAFragment.newInstance();

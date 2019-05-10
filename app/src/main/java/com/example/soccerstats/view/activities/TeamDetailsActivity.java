@@ -1,4 +1,4 @@
-package com.example.soccerstats.view;
+package com.example.soccerstats.view.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.Leagues;
@@ -24,7 +24,6 @@ import retrofit2.Response;
 public class TeamDetailsActivity extends AppCompatActivity {
 
     public static final String TAG = TeamDetailsActivity.class.getSimpleName();
-    public static final String BASE_URL = "http://soccer.sportsopendata.net/";
     public static String league;
 
     @BindView(R.id.details_recycler_view)
@@ -35,6 +34,9 @@ public class TeamDetailsActivity extends AppCompatActivity {
 
     static String teamId;
     static String teamNameStr;
+
+    /*@BindView(R.id.btn_bet)
+    Button btnBet;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

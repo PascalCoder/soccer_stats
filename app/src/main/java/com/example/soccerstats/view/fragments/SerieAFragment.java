@@ -41,10 +41,10 @@ public class SerieAFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_premier_league, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_serie_a, container, false);
 
         RetrofitHelper.initializeRetrofit();
-        recyclerView = rootView.findViewById(R.id.prem_league_recycler_view);
+        recyclerView = rootView.findViewById(R.id.serie_a_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         getSerieAStandings();
