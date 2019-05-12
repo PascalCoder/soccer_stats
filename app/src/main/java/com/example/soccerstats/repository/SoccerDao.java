@@ -7,13 +7,12 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.soccerstats.model.Bet;
 import com.example.soccerstats.model.rounds.Match;
 
 import java.util.List;
 
 @Dao
-public interface MatchDao {
+public interface SoccerDao {
 
     @Insert
     void insert(Match match);

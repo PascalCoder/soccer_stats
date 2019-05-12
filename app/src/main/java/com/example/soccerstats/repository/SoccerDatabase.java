@@ -20,6 +20,8 @@ public abstract class SoccerDatabase extends RoomDatabase {
 
     public abstract GamerDao gamerDao();
 
+    public abstract SoccerDao matchDao();
+
     public static synchronized SoccerDatabase getInstance(Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),

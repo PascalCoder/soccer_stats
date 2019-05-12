@@ -25,10 +25,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:layout_marginEnd="10dp"
                 android:text="Manchester City"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
             <EditText
                 android:id="@+id/et_h_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="gone"/>
+            <NumberPicker
+                android:id="@+id/np_h_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -36,9 +44,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
             <EditText
                 android:id="@+id/et_a_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="gone"/>
+            <NumberPicker
+                android:id="@+id/np_a_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -46,8 +61,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:layout_marginStart="10dp"
                 android:text="Wolves"
-                android:gravity="start"/>
+                android:gravity="start"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
         </LinearLayout>
 
         <Button

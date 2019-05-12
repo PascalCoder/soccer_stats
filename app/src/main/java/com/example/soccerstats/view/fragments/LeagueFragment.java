@@ -14,50 +14,48 @@ import android.widget.Toast;
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.Leagues;
 import com.example.soccerstats.model.RetrofitHelper;
-import com.example.soccerstats.model.SoccerApi;
 import com.example.soccerstats.model.standings.StandingsData;
 import com.example.soccerstats.view.adapters.StandingsAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LigaFragment extends Fragment {
+public class LeagueFragment extends Fragment {
 
     RecyclerView recyclerView;
 
-    //public static final String BASE_URL = "http://soccer.sportsopendata.net/";
-    public static final String TAG = LigaFragment.class.getSimpleName();
+    private static final String TAG = LeagueFragment.class.getSimpleName();
+    public static String league;
 
-    public LigaFragment() {
+    public LeagueFragment() {
         // Required empty public constructor
     }
 
-    public static LigaFragment newInstance(){return new LigaFragment();}
+    public static LeagueFragment newInstance(){return new LeagueFragment();}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_liga, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_league, container, false);
 
         RetrofitHelper.initializeRetrofit();
-        recyclerView = rootView.findViewById(R.id.liga_recycler_view);
+        recyclerView = rootView.findViewById(R.id.league_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getLigaStandings();
+        league = getArguments().getString("league");
+
+        getLeagueStandings();
 
         return rootView;
     }
 
-    private void getLigaStandings(){
-        RetrofitHelper.soccerApi.getStandings(Leagues.LIGA, Leagues.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
+    private void getLeagueStandings(){
+        RetrofitHelper.soccerApi.getStandings(league, Leagues.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
             @Override
             public void onResponse(Call<StandingsData> call, Response<StandingsData> response) {
                 Log.d(TAG, "onResponse: " + response.body().getStandingList().getStandings().get(0).getTeam());
@@ -70,4 +68,6 @@ public class LigaFragment extends Fragment {
             }
         });
     }
+
+
 }

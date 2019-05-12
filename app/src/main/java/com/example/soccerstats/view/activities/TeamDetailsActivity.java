@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.soccerstats.R;
@@ -52,8 +51,8 @@ public class TeamDetailsActivity extends AppCompatActivity {
         RetrofitHelper.initializeRetrofit();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        league = MainActivity.LEAGUE;
-        Log.d(TAG, "onCreate: " + MainActivity.LEAGUE);
+        league = MainActivity_2.LEAGUE;
+        Log.d(TAG, "onCreate: " + MainActivity_2.LEAGUE);
 
         getTeamResults();
 

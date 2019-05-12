@@ -1,0 +1,44 @@
+package com.example.soccerstats.viewmodel;
+
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
+
+import com.example.soccerstats.model.Bet;
+import com.example.soccerstats.repository.BetRepository;
+
+import java.util.List;
+
+public class BetViewModel extends AndroidViewModel {
+
+    private BetRepository repository;
+    private LiveData<List<Bet>> allBets;
+
+    public BetViewModel(@NonNull Application application) {
+        super(application);
+
+        repository = new BetRepository(application);
+        allBets = repository.getAllBets();
+    }
+
+    public void insert(Bet bet){
+        repository.insert(bet);
+    }
+
+    public void update(Bet bet){
+        repository.update(bet);
+    }
+
+    public void delete(Bet bet){
+        repository.delete(bet);
+    }
+
+    public void deleteAllBets(){
+        repository.deleteAllBets();
+    }
+
+    public LiveData<List<Bet>> getAllBets(){
+        return allBets;
+    }
+}
