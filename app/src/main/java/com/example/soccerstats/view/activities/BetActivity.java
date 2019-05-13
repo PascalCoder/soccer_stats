@@ -44,6 +44,7 @@ public class BetActivity extends AppCompatActivity {
     NumberPicker numberPickerAway;
 
     static Bet bet;
+    static String league;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +61,13 @@ public class BetActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Match match = intent.getParcelableExtra("match");
-        Toast.makeText(this, "Well done! " + match.getHomeTeam(), Toast.LENGTH_SHORT).show();
+        league = intent.getStringExtra("league");
+
         bet = new Bet();
         bet.setMatchId(match.getIdentifier());
         bet.setHomeTeam(match.getHomeTeam());
         bet.setAwayTeam(match.getAwayTeam());
+        bet.setMatchLeague(league);
 
         tvHomeTeam.setText(match.getHomeTeam());
         tvAwayTeam.setText(match.getAwayTeam());
@@ -72,34 +75,21 @@ public class BetActivity extends AppCompatActivity {
         betViewModel.getAllBets().observe(this, new Observer<List<Bet>>() {
             @Override
             public void onChanged(@Nullable List<Bet> bets) {
-                Toast.makeText(BetActivity.this, "onChanged: Changed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(BetActivity.this, "onChanged: Changed", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnSubmit.setOnClickListener(v -> {
-            /*if(etHomeScore.getText().toString().equals(" ")
-                    || etHomeScore.getText().toString() == null || etHomeScore.getText().toString().equals("")){
-                Toast.makeText(this, "Please provide your scores!", Toast.LENGTH_SHORT).show();
-                return;
-            }else if(etAwayScore.getText().toString().equals(" ")
-                    || etAwayScore.getText().toString() == null || etAwayScore.getText().toString().equals("")){
-                Toast.makeText(this, "Please provide your scores!", Toast.LENGTH_SHORT).show();
-                return;
-            }else{
-                *//*bet.setHomeTeamScore(etHomeScore.getText().toString());
-                bet.setAwayTeamScore(etAwayScore.getText().toString());*//*
 
-                bet.setHomeTeamScore(numberPickerHome.getValue() + "");
-                bet.setAwayTeamScore(numberPickerAway.getValue() + "");
-
-                betViewModel.insert(bet);
-
-                Toast.makeText(this, "Submitted! " + numberPickerHome.getValue(), Toast.LENGTH_SHORT).show();
-            }*/
             bet.setHomeTeamScore(numberPickerHome.getValue() + "");
             bet.setAwayTeamScore(numberPickerAway.getValue() + "");
+            if(numberPickerHome.getValue() > numberPickerAway.getValue()){
+                bet.setWinningTeam(bet.getHomeTeam());
+            }else if(numberPickerAway.getValue() > numberPickerHome.getValue()){
+                bet.setWinningTeam(bet.getAwayTeam());
+            }
 
-            Toast.makeText(this, "Submitted! " + numberPickerHome.getValue(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Submitted! ", Toast.LENGTH_SHORT).show();
 
             onBackPressed();
         });

@@ -10,25 +10,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.standings.StandingList;
 import com.example.soccerstats.model.standings.StandingsData;
+import com.example.soccerstats.view.activities.StandingsActivity;
 import com.example.soccerstats.view.activities.TeamDetailsActivity;
 
-public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.CustomViewHolder>{
+public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.CustomViewHolder> {
 
     public static final String TAG = StandingsAdapter.class.getSimpleName();
 
     public static StandingList dataSet;
-    CardView cardView;
 
     private Context context;
 
     static String teamIdentifier;
 
-    public StandingsAdapter(StandingsData standingsData){
+    private int lastPosition = -1;
+
+    public StandingsAdapter(StandingsData standingsData) {
         this.dataSet = standingsData.getStandingList();
     }
 
@@ -45,23 +49,39 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
 
         int goalDiff = dataSet.getStandings().get(position).getOverall().getGoalDifference();
 
-        String goalDiffStr = (goalDiff > 0)? "+" + goalDiff : "" + goalDiff;
+        String goalDiffStr = (goalDiff > 0) ? "+" + goalDiff : "" + goalDiff;
 
         customViewHolder.tvPosition.setText("" + dataSet.getStandings().get(position).getPosition());
         customViewHolder.tvTeamName.setText(dataSet.getStandings().get(position).getTeam());
         customViewHolder.tvPoints.setText("" + dataSet.getStandings().get(position).getOverall().getPoints());
         customViewHolder.tvGoalDiff.setText(goalDiffStr);
-        if(goalDiff > 0){
-            customViewHolder.tvGoalDiff.setTextColor(Color.rgb(0,133,119));
-        }else if(goalDiff < 0){
+        if (goalDiff > 0) {
+            customViewHolder.tvGoalDiff.setTextColor(Color.rgb(0, 133, 119));
+        } else if (goalDiff < 0) {
             customViewHolder.tvGoalDiff.setTextColor(Color.RED);
         }
 
         customViewHolder.tvId.setText(dataSet.getStandings().get(position).getTeamIdentifier());
 
+        setAnimation(customViewHolder.cardView, position);
+
         teamIdentifier = dataSet.getStandings().get(position).getTeamIdentifier();
         Log.d(TAG, "onBindViewHolder: " + dataSet.getStandings().get(position).getTeamIdentifier());
-}
+    }
+
+    private void setAnimation(View viewToAnimate, int position){
+        if(position > lastPosition){
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull CustomViewHolder holder) {
+        //super.onViewDetachedFromWindow(holder);
+        ((CustomViewHolder)holder).itemView.clearAnimation();
+    }
 
     @Override
     public int getItemCount() {
@@ -71,6 +91,7 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPosition, tvTeamName, tvPoints, tvGoalDiff, tvId;
+        CardView cardView;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,7 +107,7 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
 
             cardView = itemView.findViewById(R.id.card_view);
 
-            cardView.setOnClickListener(new View.OnClickListener(){
+            cardView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -94,6 +115,7 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
                     Intent intent = new Intent(context, TeamDetailsActivity.class);
                     intent.putExtra("id", tvId.getText().toString());
                     intent.putExtra("team", tvTeamName.getText().toString());
+                    intent.putExtra("league", StandingsActivity.league);
 
                     context.startActivity(intent);
                 }

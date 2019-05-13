@@ -9,8 +9,9 @@ import android.content.Context;
 import com.example.soccerstats.model.Bet;
 import com.example.soccerstats.model.Gamer;
 import com.example.soccerstats.model.rounds.Match;
+import com.example.soccerstats.model.standings.Standing;
 
-@Database(entities = {Bet.class, Gamer.class, Match.class}, version = 1, exportSchema = false)
+@Database(entities = {Bet.class, Gamer.class, Match.class}, version = 2, exportSchema = false) //, Standing.class
 @TypeConverters({Converters.class, GamerConverter.class})
 public abstract class SoccerDatabase extends RoomDatabase {
 

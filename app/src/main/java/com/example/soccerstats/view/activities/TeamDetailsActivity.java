@@ -34,9 +34,6 @@ public class TeamDetailsActivity extends AppCompatActivity {
     static String teamId;
     static String teamNameStr;
 
-    /*@BindView(R.id.btn_bet)
-    Button btnBet;*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +48,7 @@ public class TeamDetailsActivity extends AppCompatActivity {
         RetrofitHelper.initializeRetrofit();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        league = MainActivity_2.LEAGUE;
+        league = StandingsActivity.league;
         Log.d(TAG, "onCreate: " + MainActivity_2.LEAGUE);
 
         getTeamResults();

@@ -17,6 +17,8 @@ public class Bet implements Parcelable {
     private String homeTeamScore;
     private String awayTeamScore;
     private String matchId;
+    private String matchLeague;
+    private String winningTeam;
 
     public Bet(){}
 
@@ -100,6 +102,22 @@ public class Bet implements Parcelable {
 
     public void setMatchId(String matchId) {
         this.matchId = matchId;
+    }
+
+    public String getMatchLeague() {
+        return matchLeague;
+    }
+
+    public void setMatchLeague(String matchLeague) {
+        this.matchLeague = matchLeague;
+    }
+
+    public String getWinningTeam() {
+        return winningTeam;
+    }
+
+    public void setWinningTeam(String winningTeam) {
+        this.winningTeam = winningTeam;
     }
 
     @Override

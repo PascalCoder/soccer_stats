@@ -12,7 +12,7 @@ import com.example.soccerstats.view.fragments.LeagueFragment;
 
 public class StandingsActivity extends AppCompatActivity {
 
-    static String league;
+    public static String league;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
