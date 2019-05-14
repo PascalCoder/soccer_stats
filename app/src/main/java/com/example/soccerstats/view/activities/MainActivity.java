@@ -1,19 +1,19 @@
 package com.example.soccerstats.view.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.Leagues;
-import com.example.soccerstats.view.fragments.LeagueFragment;
+
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,14 +21,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.cv_liga)
-    CardView cvLiga;
-    @BindView(R.id.cv_premier_league)
-    CardView cvPremLeague;
-    @BindView(R.id.cv_bundesliga)
-    CardView cvBundesliga;
-    @BindView(R.id.cv_serie_a)
-    CardView cvSerieA;
+    @BindViews({R.id.cv_liga, R.id.cv_premier_league, R.id.cv_bundesliga, R.id.cv_serie_a})
+    List<CardView> cardViewList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +32,19 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        cvLiga.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), StandingsActivity.class);
-            intent.putExtra("league", Leagues.LIGA);
-            startActivity(intent);
-        });
+        cardViewList.get(0).setOnClickListener(v -> getLeagueStandings(Leagues.LIGA, v.getContext()));
 
-        cvPremLeague.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), StandingsActivity.class);
-            intent.putExtra("league", Leagues.PREMIER_LEAGUE);
-            startActivity(intent);
-        });
+        cardViewList.get(1).setOnClickListener(v -> getLeagueStandings(Leagues.PREMIER_LEAGUE, v.getContext()));
 
-        cvBundesliga.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), StandingsActivity.class);
-            intent.putExtra("league", Leagues.BUNDESLIGA);
-            startActivity(intent);
-        });
+        cardViewList.get(2).setOnClickListener(v -> getLeagueStandings(Leagues.BUNDESLIGA, v.getContext()));
 
-        cvSerieA.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), StandingsActivity.class);
-            intent.putExtra("league", Leagues.SERIE_A);
-            startActivity(intent);
-        });
+        cardViewList.get(3).setOnClickListener(v -> getLeagueStandings(Leagues.SERIE_A, v.getContext()));
+
+    }
+
+    void getLeagueStandings(String league, Context context){
+        Intent intent = new Intent(context, StandingsActivity.class);
+        intent.putExtra("league", league);
+        startActivity(intent);
     }
 }

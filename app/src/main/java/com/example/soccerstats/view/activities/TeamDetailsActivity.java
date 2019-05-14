@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.soccerstats.R;
@@ -49,7 +48,6 @@ public class TeamDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         league = StandingsActivity.league;
-        Log.d(TAG, "onCreate: " + MainActivity_2.LEAGUE);
 
         getTeamResults();
 
@@ -59,7 +57,8 @@ public class TeamDetailsActivity extends AppCompatActivity {
         RetrofitHelper.soccerApi.getTeamStats(league, Leagues.CURRENT_SEASON, teamId).enqueue(new Callback<MatchData>() {
             @Override
             public void onResponse(Call<MatchData> call, Response<MatchData> response) {
-                recyclerView.setAdapter(new TeamStatsAdapter(response.body()));
+                if(response.body() != null)
+                    recyclerView.setAdapter(new TeamStatsAdapter(response.body()));
             }
 
             @Override

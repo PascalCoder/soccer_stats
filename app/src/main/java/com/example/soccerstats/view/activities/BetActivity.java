@@ -18,7 +18,6 @@ import com.example.soccerstats.model.Bet;
 import com.example.soccerstats.model.rounds.Match;
 import com.example.soccerstats.viewmodel.BetViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,6 +44,8 @@ public class BetActivity extends AppCompatActivity {
 
     static Bet bet;
     static String league;
+
+    public static List<Bet> allBets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +88,20 @@ public class BetActivity extends AppCompatActivity {
                 bet.setWinningTeam(bet.getHomeTeam());
             }else if(numberPickerAway.getValue() > numberPickerHome.getValue()){
                 bet.setWinningTeam(bet.getAwayTeam());
+            }else{
+                bet.setWinningTeam("");
             }
+
+            betViewModel.insert(bet);
 
             Toast.makeText(this, "Submitted! ", Toast.LENGTH_SHORT).show();
 
             onBackPressed();
         });
+
+        LiveData<List<Bet>> betsData = betViewModel.getAllBets();
+
+        allBets = betsData.getValue();
 
     }
 }
