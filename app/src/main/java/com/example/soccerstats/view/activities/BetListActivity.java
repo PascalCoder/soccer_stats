@@ -25,6 +25,8 @@ import butterknife.ButterKnife;
 
 public class BetListActivity extends AppCompatActivity {
 
+    public static final int EDIT_BET_REQUEST = 1;
+
     @BindView(R.id.rv_bet_list)
     RecyclerView recyclerView;
 
@@ -99,7 +101,19 @@ public class BetListActivity extends AppCompatActivity {
                 Intent intent = new Intent(BetListActivity.this, BetActivity.class);
                 intent.putExtra("bet_id", bet.getId());
                 intent.putExtra("bet", bet);
+                startActivityForResult(intent, EDIT_BET_REQUEST);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == EDIT_BET_REQUEST && resultCode == RESULT_OK){
+            Toast.makeText(this, "Bet updated successfully!", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Bet could not be updated!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

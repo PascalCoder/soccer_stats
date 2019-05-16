@@ -69,18 +69,30 @@ public class BetActivity extends AppCompatActivity {
         numberPickerAway.setMaxValue(15);
 
         Intent intent = getIntent();
-        Match match = intent.getParcelableExtra("match");
-        league = intent.getStringExtra("league");
 
-        bet = new Bet();
-        bet.setMatchId(match.getIdentifier());
-        bet.setHomeTeam(match.getHomeTeam());
-        bet.setAwayTeam(match.getAwayTeam());
-        bet.setMatchLeague(league);
-        bet.setMatchDate(match.getMatchDate());
+        if(intent.hasExtra("bet_id")){
+            setTitle("Edit Bet");
+            bet = intent.getParcelableExtra("bet");
+            tvHomeTeam.setText(bet.getHomeTeam());
+            tvAwayTeam.setText(bet.getAwayTeam());
+            numberPickerHome.setValue(Integer.valueOf(bet.getHomeTeamScore()));
+            numberPickerAway.setValue(Integer.parseInt(bet.getAwayTeamScore()));
 
-        tvHomeTeam.setText(match.getHomeTeam());
-        tvAwayTeam.setText(match.getAwayTeam());
+            btnSubmit.setText(getString(R.string.update_bet));
+        }else{
+            Match match = intent.getParcelableExtra("match");
+            league = intent.getStringExtra("league");
+
+            bet = new Bet();
+            bet.setMatchId(match.getIdentifier());
+            bet.setHomeTeam(match.getHomeTeam());
+            bet.setAwayTeam(match.getAwayTeam());
+            bet.setMatchLeague(league);
+            bet.setMatchDate(match.getMatchDate());
+
+            tvHomeTeam.setText(match.getHomeTeam());
+            tvAwayTeam.setText(match.getAwayTeam());
+        }
 
         betViewModel = ViewModelProviders.of(this).get(BetViewModel.class);
         betViewModel.getAllBets().observe(this, new Observer<List<Bet>>() {
@@ -104,6 +116,14 @@ public class BetActivity extends AppCompatActivity {
                 bet.setWinningTeam(bet.getAwayTeam());
             } else {
                 bet.setWinningTeam("");
+            }
+
+            if(intent.hasExtra("bet_id")){
+                betViewModel.update(bet);
+                setResult(RESULT_OK, intent);
+
+                finish();
+                return;
             }
 
             if (isBetAlreadyPlaced(allBets, bet)) {
