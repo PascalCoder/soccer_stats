@@ -1,5 +1,6 @@
 package com.example.soccerstats.view.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -7,7 +8,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,32 +15,26 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.rounds.Match;
 import com.example.soccerstats.model.rounds.MatchData;
 import com.example.soccerstats.model.rounds.MatchList;
 import com.example.soccerstats.view.activities.BetActivity;
-import com.example.soccerstats.view.activities.TeamDetailsActivity;
+import com.example.soccerstats.view.activities.TeamStatsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
 public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.CustomViewHolder> {
 
-    private static String TAG = TeamStatsAdapter.class.getSimpleName();
-    public static MatchList dataSet;
-    public static List<Match> lastFiveMatches;
+    private static final int REQUEST_CODE = 1;
+    //private static String TAG = TeamStatsAdapter.class.getSimpleName();
+    private static MatchList dataSet;
+    //public static List<Match> lastFiveMatches;
     public static Calendar calendar;
     public static Date date;
     public static Match match;
@@ -60,6 +54,7 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.Cust
         calendar = Calendar.getInstance();
         date = new Date();
         //Log.d(TAG, "TeamStatsAdapter: " + Calendar.DATE +"\n" + date);
+        //context = ;
     }
 
     @NonNull
@@ -123,10 +118,12 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.Cust
 
             Intent intent = new Intent(v.getContext(), BetActivity.class);
             intent.putExtra("match", match);
-            intent.putExtra("league", TeamDetailsActivity.league);
+            intent.putExtra("league", TeamStatsActivity.league);
+            intent.putExtra("round_id", match.getIdentifier());
+            intent.putExtra("position", customViewHolder.getAdapterPosition());
 
-            v.getContext().startActivity(intent);
-
+            ((Activity)v.getContext()).startActivityForResult(intent, REQUEST_CODE);
+            //customViewHolder.btnBet.setEnabled(false);
         });
 
     }

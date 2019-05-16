@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.BetActivity" />
-        <activity android:name=".view.activities.TeamDetailsActivity" />
+        <activity android:name=".view.activities.TeamStatsActivity" />
         <activity android:name=".view.activities.MainActivity_2" />
     </application>
 

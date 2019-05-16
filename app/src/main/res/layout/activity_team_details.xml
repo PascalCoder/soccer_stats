@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#552a6d50"
-    tools:context=".view.activities.TeamDetailsActivity">
+    tools:context=".view.activities.TeamStatsActivity">
 
     <TextView
         android:id="@+id/tv_name"

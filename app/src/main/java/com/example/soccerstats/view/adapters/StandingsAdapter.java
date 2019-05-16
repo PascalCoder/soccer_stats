@@ -18,7 +18,7 @@ import com.example.soccerstats.R;
 import com.example.soccerstats.model.standings.StandingList;
 import com.example.soccerstats.model.standings.StandingsData;
 import com.example.soccerstats.view.activities.StandingsActivity;
-import com.example.soccerstats.view.activities.TeamDetailsActivity;
+import com.example.soccerstats.view.activities.TeamStatsActivity;
 
 public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.CustomViewHolder> {
 
@@ -112,7 +112,7 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "onClick: " + tvId.getText().toString());
-                    Intent intent = new Intent(context, TeamDetailsActivity.class);
+                    Intent intent = new Intent(context, TeamStatsActivity.class);
                     intent.putExtra("id", tvId.getText().toString());
                     intent.putExtra("team", tvTeamName.getText().toString());
                     intent.putExtra("league", StandingsActivity.league);

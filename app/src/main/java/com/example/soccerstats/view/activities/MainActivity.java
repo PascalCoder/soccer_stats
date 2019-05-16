@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.soccerstats.R;
 import com.example.soccerstats.model.Leagues;
@@ -42,9 +46,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void getLeagueStandings(String league, Context context){
+    void getLeagueStandings(String league, Context context) {
         Intent intent = new Intent(context, StandingsActivity.class);
         intent.putExtra("league", league);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.bet_menu, menu);
+
+        return true; //super.onCreateOptionsMenu(bet_menu)
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_1:
+                //Toast.makeText(this, "Item was clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, BetListActivity.class);
+                startActivity(intent);
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

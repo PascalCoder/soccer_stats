@@ -1,9 +1,13 @@
 package com.example.soccerstats.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.Date;
+import java.util.Objects;
 
 @Entity(tableName = "bet")
 public class Bet implements Parcelable {
@@ -11,6 +15,7 @@ public class Bet implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private Integer id;
 
+    //@Ignore
     private Gamer gamer;
     private String homeTeam;
     private String awayTeam;
@@ -19,8 +24,17 @@ public class Bet implements Parcelable {
     private String matchId;
     private String matchLeague;
     private String winningTeam;
+    private String matchDate;
 
     public Bet(){}
+
+    public Bet(String homeTeam, String awayTeam, String homeTeamScore, String awayTeamScore, String matchLeague) {
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.homeTeamScore = homeTeamScore;
+        this.awayTeamScore = awayTeamScore;
+        this.matchLeague = matchLeague;
+    }
 
     protected Bet(Parcel in) {
         if (in.readByte() == 0) {
@@ -120,6 +134,14 @@ public class Bet implements Parcelable {
         this.winningTeam = winningTeam;
     }
 
+    public String getMatchDate() {
+        return matchDate;
+    }
+
+    public void setMatchDate(String matchDate) {
+        this.matchDate = matchDate;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -151,5 +173,21 @@ public class Bet implements Parcelable {
                 ", awayTeamScore='" + awayTeamScore + '\'' +
                 ", matchId='" + matchId + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bet bet = (Bet) o;
+        return Objects.equals(homeTeam, bet.homeTeam) &&
+                Objects.equals(awayTeam, bet.awayTeam) &&
+                Objects.equals(matchLeague, bet.matchLeague) &&
+                Objects.equals(matchDate, bet.matchDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(homeTeam, awayTeam, matchLeague, matchDate);
     }
 }

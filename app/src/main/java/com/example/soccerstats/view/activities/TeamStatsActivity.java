@@ -19,9 +19,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TeamDetailsActivity extends AppCompatActivity {
+public class TeamStatsActivity extends AppCompatActivity {
 
-    public static final String TAG = TeamDetailsActivity.class.getSimpleName();
+    public static final String TAG = TeamStatsActivity.class.getSimpleName();
     public static String league;
 
     @BindView(R.id.details_recycler_view)
