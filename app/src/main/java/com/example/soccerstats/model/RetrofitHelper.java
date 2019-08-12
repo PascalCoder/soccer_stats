@@ -28,6 +28,5 @@ public class RetrofitHelper {
                 .connectTimeout(90, TimeUnit.SECONDS)
                 .connectTimeout(90, TimeUnit.SECONDS)
                 .cache(null);
-
     }
 }

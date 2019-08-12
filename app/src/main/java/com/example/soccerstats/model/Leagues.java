@@ -12,7 +12,7 @@ public class Leagues {
     public static final String SERIE_A_TITLE = "SERIE A";
     public static final String BUNDESLIGA_TITLE = "BUNDESLIGA";
 
-    public static final String CURRENT_SEASON = "18-19";
+    public static final String CURRENT_SEASON = "19-20";
     public static final String LAST_SEASON = "17-18";
     public static final String LAST_SEASON_2 = "16-17";
 

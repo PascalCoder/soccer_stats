@@ -2,6 +2,7 @@ package com.example.soccerstats.view.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,10 +36,12 @@ public class LeagueFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static LeagueFragment newInstance(){return new LeagueFragment();}
+    public static LeagueFragment newInstance() {
+        return new LeagueFragment();
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_league, container, false);
@@ -47,6 +50,7 @@ public class LeagueFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.league_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
         league = getArguments().getString("league");
 
         getLeagueStandings();
@@ -54,12 +58,15 @@ public class LeagueFragment extends Fragment {
         return rootView;
     }
 
-    private void getLeagueStandings(){
+    private void getLeagueStandings() {
         RetrofitHelper.soccerApi.getStandings(league, Leagues.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
             @Override
             public void onResponse(Call<StandingsData> call, Response<StandingsData> response) {
-                Log.d(TAG, "onResponse: " + response.body().getStandingList().getStandings().get(0).getTeam());
-                recyclerView.setAdapter(new StandingsAdapter(response.body()));
+
+                if (response.body() != null) {
+                    Log.d(TAG, "onResponse: " + response.body().getStandingList().getStandings().get(0).getTeam());
+                    recyclerView.setAdapter(new StandingsAdapter(response.body()));
+                }
             }
 
             @Override
