@@ -1,9 +1,9 @@
 package com.example.soccerstats.view.activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.Leagues;
+import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.adapters.PagerAdapter;
 
 import butterknife.BindView;
@@ -38,13 +38,13 @@ public class MainActivity_2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_2);
         ButterKnife.bind(this);
-        LEAGUE = Leagues.LIGA;
+        LEAGUE = LeaguesConstants.LIGA;
 
         setSupportActionBar(toolbar);
 
-        tabLayout.addTab(tabLayout.newTab().setText(Leagues.LIGA_TITLE));
-        tabLayout.addTab(tabLayout.newTab().setText(Leagues.PREMIER_LEAGUE_TITLE));
-        tabLayout.addTab(tabLayout.newTab().setText(Leagues.SERIE_A_TITLE));
+        tabLayout.addTab(tabLayout.newTab().setText(LeaguesConstants.LIGA_TITLE));
+        tabLayout.addTab(tabLayout.newTab().setText(LeaguesConstants.PREMIER_LEAGUE_TITLE));
+        tabLayout.addTab(tabLayout.newTab().setText(LeaguesConstants.SERIE_A_TITLE));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //tabLayout.clearOnTabSelectedListeners();

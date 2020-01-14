@@ -12,17 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.Leagues;
 import com.example.soccerstats.model.RetrofitHelper;
-import com.example.soccerstats.model.SoccerApi;
 import com.example.soccerstats.model.standings.StandingsData;
+import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.adapters.StandingsAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,7 +54,7 @@ public class LigaFragment extends Fragment {
     }
 
     private void getLigaStandings(){
-        RetrofitHelper.soccerApi.getStandings(Leagues.LIGA, Leagues.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
+        RetrofitHelper.soccerApi.getStandings(LeaguesConstants.LIGA, LeaguesConstants.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
             @Override
             public void onResponse(Call<StandingsData> call, Response<StandingsData> response) {
                 Log.d(TAG, "onResponse: " + response.body().getStandingList().getStandings().get(0).getTeam());

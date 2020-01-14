@@ -11,9 +11,8 @@ import android.support.annotation.NonNull;
 
 import com.example.soccerstats.model.Bet;
 import com.example.soccerstats.model.Gamer;
-import com.example.soccerstats.model.Leagues;
 import com.example.soccerstats.model.rounds.Match;
-import com.example.soccerstats.model.standings.Standing;
+import com.example.soccerstats.util.LeaguesConstants;
 
 @Database(entities = {Bet.class, Gamer.class, Match.class}, version = 3, exportSchema = false) //, Standing.class
 @TypeConverters({Converters.class, GamerConverter.class})
@@ -55,8 +54,8 @@ public abstract class SoccerDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            betDao.insert(new Bet("Liverpool", "Chelsea", "3", "2", Leagues.PREMIER_LEAGUE));
-            betDao.insert(new Bet("Real Madrid", "Valencia", "4", "2", Leagues.PREMIER_LEAGUE));
+            betDao.insert(new Bet("Liverpool", "Chelsea", "3", "2", LeaguesConstants.PREMIER_LEAGUE));
+            betDao.insert(new Bet("Real Madrid", "Valencia", "4", "2", LeaguesConstants.PREMIER_LEAGUE));
 
             return null;
         }

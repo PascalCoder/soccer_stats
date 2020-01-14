@@ -1,4 +1,4 @@
-package com.example.soccerstats.model;
+package com.example.soccerstats.util;
 
 public class TopTeams {
 

@@ -1,6 +1,6 @@
-package com.example.soccerstats.model;
+package com.example.soccerstats.util;
 
-public class Leagues {
+public class LeaguesConstants {
 
     public static final String LIGA = "liga";
     public static final String PREMIER_LEAGUE = "premier-league";

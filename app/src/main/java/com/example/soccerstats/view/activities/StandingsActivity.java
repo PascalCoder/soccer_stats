@@ -1,13 +1,13 @@
 package com.example.soccerstats.view.activities;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.Leagues;
+import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.fragments.LeagueFragment;
 
 import butterknife.BindView;
@@ -31,16 +31,16 @@ public class StandingsActivity extends AppCompatActivity {
         String title = "";
         switch (league){
             case "liga":
-                title = "LA " + Leagues.LIGA_TITLE;
+                title = "LA " + LeaguesConstants.LIGA_TITLE;
                 break;
             case "premier-league":
-                title = Leagues.PREMIER_LEAGUE_TITLE;
+                title = LeaguesConstants.PREMIER_LEAGUE_TITLE;
                 break;
             case "bundesliga":
-                title = Leagues.BUNDESLIGA_TITLE;
+                title = LeaguesConstants.BUNDESLIGA_TITLE;
                 break;
             case "serie-a":
-                title = Leagues.SERIE_A_TITLE;
+                title = LeaguesConstants.SERIE_A_TITLE;
                 break;
         }
         toolbar.setTitle(title + "  Standings");

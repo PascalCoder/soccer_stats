@@ -1,16 +1,16 @@
 package com.example.soccerstats.view.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.Leagues;
 import com.example.soccerstats.model.RetrofitHelper;
 import com.example.soccerstats.model.rounds.MatchData;
+import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.adapters.TeamStatsAdapter;
 
 import butterknife.BindView;
@@ -54,7 +54,7 @@ public class TeamStatsActivity extends AppCompatActivity {
     }
 
     public void getTeamResults(){
-        RetrofitHelper.soccerApi.getTeamStats(league, Leagues.CURRENT_SEASON, teamId).enqueue(new Callback<MatchData>() {
+        RetrofitHelper.soccerApi.getTeamStats(league, LeaguesConstants.CURRENT_SEASON, teamId).enqueue(new Callback<MatchData>() {
             @Override
             public void onResponse(Call<MatchData> call, Response<MatchData> response) {
                 if(response.body() != null)

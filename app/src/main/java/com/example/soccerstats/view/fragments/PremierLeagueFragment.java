@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.Leagues;
 import com.example.soccerstats.model.RetrofitHelper;
 import com.example.soccerstats.model.standings.StandingsData;
+import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.adapters.StandingsAdapter;
 
 import retrofit2.Call;
@@ -54,7 +54,7 @@ public class PremierLeagueFragment extends Fragment {
 
     private void getPremierLeagueStandings() {
 
-        RetrofitHelper.soccerApi.getStandings(Leagues.PREMIER_LEAGUE, Leagues.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
+        RetrofitHelper.soccerApi.getStandings(LeaguesConstants.PREMIER_LEAGUE, LeaguesConstants.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
             @Override
             public void onResponse(Call<StandingsData> call, Response<StandingsData> response) {
                 Log.d(TAG, "onResponse: " + response.body().getStandingList().getStandings().get(0).getTeam());

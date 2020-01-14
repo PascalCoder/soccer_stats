@@ -2,17 +2,16 @@ package com.example.soccerstats.view.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.Leagues;
+import com.example.soccerstats.util.LeaguesConstants;
 
 import java.util.List;
 
@@ -36,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        cardViewList.get(0).setOnClickListener(v -> getLeagueStandings(Leagues.LIGA, v.getContext()));
+        cardViewList.get(0).setOnClickListener(v -> getLeagueStandings(LeaguesConstants.LIGA, v.getContext()));
 
-        cardViewList.get(1).setOnClickListener(v -> getLeagueStandings(Leagues.PREMIER_LEAGUE, v.getContext()));
+        cardViewList.get(1).setOnClickListener(v -> getLeagueStandings(LeaguesConstants.PREMIER_LEAGUE, v.getContext()));
 
-        cardViewList.get(2).setOnClickListener(v -> getLeagueStandings(Leagues.BUNDESLIGA, v.getContext()));
+        cardViewList.get(2).setOnClickListener(v -> getLeagueStandings(LeaguesConstants.BUNDESLIGA, v.getContext()));
 
-        cardViewList.get(3).setOnClickListener(v -> getLeagueStandings(Leagues.SERIE_A, v.getContext()));
+        cardViewList.get(3).setOnClickListener(v -> getLeagueStandings(LeaguesConstants.SERIE_A, v.getContext()));
 
     }
 
