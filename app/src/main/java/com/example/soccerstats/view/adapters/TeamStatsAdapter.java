@@ -29,14 +29,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import static com.example.soccerstats.util.Constants.LEAGUE_CONST;
+import static com.example.soccerstats.util.Constants.MATCH_CONST;
+import static com.example.soccerstats.util.Constants.POSITION_CONST;
+import static com.example.soccerstats.util.Constants.ROUND_ID_CONST;
+
 public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.CustomViewHolder> {
 
     private static final int REQUEST_CODE = 1;
     //private static String TAG = TeamStatsAdapter.class.getSimpleName();
-    private static MatchList dataSet;
+    private MatchList dataSet;
     //public static List<Match> lastFiveMatches;
-    public static Calendar calendar;
-    public static Date date;
+    private Calendar calendar;
+    private Date date;
     public static Match match;
 
     private Context context;
@@ -44,7 +49,7 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.Cust
     private int lastPosition = -1;
 
     //public static LocalDateTime TODAY = LocalDateTime.ofInstant((new Date()).toInstant(), ZoneId.systemDefault());
-    static final Date TODAY = new Date();
+    private static final Date TODAY = new Date();
 
     public TeamStatsAdapter(MatchData matchData){
         this.dataSet = matchData.getData();
@@ -102,11 +107,11 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.Cust
         }
 
         //Change Team's name color based on score
-        if(homeScore > awayScore && homeScore != awayScore){
+        if(homeScore > awayScore){
             customViewHolder.tvHomeTeam.setTextColor(Color.rgb(0, 133, 119));
-        }else if(awayScore > homeScore && homeScore != awayScore){
+        }else if(awayScore > homeScore){
             customViewHolder.tvAwayTeam.setTextColor(Color.rgb(0, 133, 119));
-        }else if(customViewHolder.tvHomeTeamScore.getText().equals("") || homeScore == awayScore){
+        }else {
             customViewHolder.tvHomeTeam.setTextColor(defaultColor);
             customViewHolder.tvAwayTeam.setTextColor(defaultColor);
         }
@@ -117,10 +122,10 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.Cust
             Match match = dataSet.getMatchList().get(customViewHolder.getAdapterPosition());
 
             Intent intent = new Intent(v.getContext(), BetActivity.class);
-            intent.putExtra("match", match);
-            intent.putExtra("league", TeamStatsActivity.league);
-            intent.putExtra("round_id", match.getIdentifier());
-            intent.putExtra("position", customViewHolder.getAdapterPosition());
+            intent.putExtra(MATCH_CONST, match);
+            intent.putExtra(LEAGUE_CONST, TeamStatsActivity.league);
+            intent.putExtra(ROUND_ID_CONST, match.getIdentifier());
+            intent.putExtra(POSITION_CONST, customViewHolder.getAdapterPosition());
 
             ((Activity)v.getContext()).startActivityForResult(intent, REQUEST_CODE);
             //customViewHolder.btnBet.setEnabled(false);
@@ -154,7 +159,7 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.Cust
     @Override
     public void onViewDetachedFromWindow(@NonNull CustomViewHolder holder) {
         //super.onViewDetachedFromWindow(holder);
-        ((CustomViewHolder)holder).itemView.clearAnimation();
+        (holder).itemView.clearAnimation();
     }
 
     @Override
@@ -162,13 +167,13 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.Cust
         return dataSet.getMatchList().size();
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvHomeTeam, tvAwayTeam, tvHomeTeamScore, tvAwayTeamScore, tvMatchDay;
         Button btnBet;
         CardView cardView;
 
-        public CustomViewHolder(@NonNull View itemView) {
+        CustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
             context = itemView.getContext();

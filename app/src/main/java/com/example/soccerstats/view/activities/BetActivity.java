@@ -1,11 +1,9 @@
 package com.example.soccerstats.view.activities;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +25,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.soccerstats.util.Constants.BET_CONST;
+import static com.example.soccerstats.util.Constants.BET_ID_CONST;
+import static com.example.soccerstats.util.Constants.LEAGUE_CONST;
+import static com.example.soccerstats.util.Constants.MATCH_CONST;
 
 public class BetActivity extends AppCompatActivity {
 
@@ -70,18 +73,18 @@ public class BetActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra("bet_id")){
+        if (intent.hasExtra(BET_ID_CONST)) {
             setTitle("Edit Bet");
-            bet = intent.getParcelableExtra("bet");
+            bet = intent.getParcelableExtra(BET_CONST);
             tvHomeTeam.setText(bet.getHomeTeam());
             tvAwayTeam.setText(bet.getAwayTeam());
             numberPickerHome.setValue(Integer.valueOf(bet.getHomeTeamScore()));
             numberPickerAway.setValue(Integer.parseInt(bet.getAwayTeamScore()));
 
             btnSubmit.setText(getString(R.string.update_bet));
-        }else{
-            Match match = intent.getParcelableExtra("match");
-            league = intent.getStringExtra("league");
+        } else {
+            Match match = intent.getParcelableExtra(MATCH_CONST);
+            league = intent.getStringExtra(LEAGUE_CONST);
 
             bet = new Bet();
             bet.setMatchId(match.getIdentifier());
@@ -95,15 +98,24 @@ public class BetActivity extends AppCompatActivity {
         }
 
         betViewModel = ViewModelProviders.of(this).get(BetViewModel.class);
-        betViewModel.getAllBets().observe(this, new Observer<List<Bet>>() {
+        /*betViewModel.getAllBets().observe(this, new Observer<List<Bet>>() {
             @Override
             public void onChanged(@Nullable List<Bet> bets) {
                 //Toast.makeText(BetListActivity.this, "oChange", Toast.LENGTH_SHORT).show();
-                if(bets != null){
+                if (bets != null) {
                     allBets = new ArrayList<>(bets);
                     Toast.makeText(BetActivity.this, "" + allBets.size(), Toast.LENGTH_SHORT).show();
                 }
             }
+        });*/
+
+        betViewModel.getAllBets().observe(this, bets -> {
+
+            if (bets != null) {
+                allBets = new ArrayList<>(bets);
+                Toast.makeText(BetActivity.this, "" + allBets.size(), Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         btnSubmit.setOnClickListener(v -> {
@@ -118,7 +130,7 @@ public class BetActivity extends AppCompatActivity {
                 bet.setWinningTeam("");
             }
 
-            if(intent.hasExtra("bet_id")){
+            if (intent.hasExtra(BET_ID_CONST)) {
                 betViewModel.update(bet);
                 setResult(RESULT_OK, intent);
 

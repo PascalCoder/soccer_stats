@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.RetrofitHelper;
+import com.example.soccerstats.network.RetrofitHelper;
 import com.example.soccerstats.model.standings.StandingsData;
 import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.adapters.StandingsAdapter;
@@ -50,8 +50,11 @@ public class LeagueFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.league_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-        league = getArguments().getString("league");
+        if (getArguments() != null){
+            league = getArguments().getString("league");
+        } else {
+            league = LeaguesConstants.PREMIER_LEAGUE;
+        }
 
         getLeagueStandings();
 
@@ -61,7 +64,7 @@ public class LeagueFragment extends Fragment {
     private void getLeagueStandings() {
         RetrofitHelper.soccerApi.getStandings(league, LeaguesConstants.CURRENT_SEASON).enqueue(new Callback<StandingsData>() {
             @Override
-            public void onResponse(Call<StandingsData> call, Response<StandingsData> response) {
+            public void onResponse(@NonNull Call<StandingsData> call, @NonNull Response<StandingsData> response) {
 
                 if (response.body() != null) {
                     Log.d(TAG, "onResponse: " + response.body().getStandingList().getStandings().get(0).getTeam());
@@ -70,7 +73,7 @@ public class LeagueFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<StandingsData> call, Throwable t) {
+            public void onFailure(@NonNull Call<StandingsData> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
             }
         });

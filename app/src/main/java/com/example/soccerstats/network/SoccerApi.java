@@ -1,4 +1,4 @@
-package com.example.soccerstats.model;
+package com.example.soccerstats.network;
 
 import com.example.soccerstats.model.rounds.MatchData;
 import com.example.soccerstats.model.standings.StandingsData;
@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface SoccerApi {
+public interface SoccerApi { //methods that execute the webservice request
 
     @GET("v1/leagues/{league}/seasons/{year}/teams") //Ex: league: liga, year:18-19
     Call<TeamList> getTeam(@Path("league")String league, @Path("year")String year);

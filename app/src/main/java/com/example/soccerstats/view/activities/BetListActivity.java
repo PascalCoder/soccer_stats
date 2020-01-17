@@ -23,6 +23,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.soccerstats.util.Constants.BET_CONST;
+import static com.example.soccerstats.util.Constants.BET_ID_CONST;
+
 public class BetListActivity extends AppCompatActivity {
 
     public static final int EDIT_BET_REQUEST = 1;
@@ -99,8 +102,8 @@ public class BetListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Bet bet) {
                 Intent intent = new Intent(BetListActivity.this, BetActivity.class);
-                intent.putExtra("bet_id", bet.getId());
-                intent.putExtra("bet", bet);
+                intent.putExtra(BET_ID_CONST, bet.getId());
+                intent.putExtra(BET_CONST, bet);
                 startActivityForResult(intent, EDIT_BET_REQUEST);
             }
         });

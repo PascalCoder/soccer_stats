@@ -1,8 +1,11 @@
 package com.example.soccerstats.view.activities;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.soccerstats.R;
+import com.example.soccerstats.model.standings.Standing;
 import com.example.soccerstats.util.LeaguesConstants;
+import com.example.soccerstats.viewmodel.MainActivityViewModel;
 
 import java.util.List;
 
@@ -20,6 +25,8 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+
+    private MainActivityViewModel mStandingListViewModel;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -33,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        mStandingListViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+
+        subscribeObservers();
+
         setSupportActionBar(toolbar);
 
         cardViewList.get(0).setOnClickListener(v -> getLeagueStandings(LeaguesConstants.LIGA, v.getContext()));
@@ -43,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
         cardViewList.get(3).setOnClickListener(v -> getLeagueStandings(LeaguesConstants.SERIE_A, v.getContext()));
 
+    }
+
+    private void subscribeObservers(){
+        mStandingListViewModel.getStandings().observe(this, new Observer<List<Standing>>() {
+            @Override
+            public void onChanged(@Nullable List<Standing> standings) {
+
+            }
+        });
     }
 
     void getLeagueStandings(String league, Context context) {

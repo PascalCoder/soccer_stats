@@ -2,15 +2,15 @@ package com.example.soccerstats.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.RetrofitHelper;
 import com.example.soccerstats.model.rounds.MatchData;
-import com.example.soccerstats.util.LeaguesConstants;
+import com.example.soccerstats.network.RetrofitHelper;
 import com.example.soccerstats.view.adapters.TeamStatsAdapter;
 
 import butterknife.BindView;
@@ -19,9 +19,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.soccerstats.util.Constants.ID_CONST;
+import static com.example.soccerstats.util.Constants.TEAM_CONST;
+import static com.example.soccerstats.util.LeaguesConstants.CURRENT_SEASON;
+
 public class TeamStatsActivity extends AppCompatActivity {
 
-    public static final String TAG = TeamStatsActivity.class.getSimpleName();
+    //public static final String TAG = TeamStatsActivity.class.getSimpleName();
     public static String league;
 
     @BindView(R.id.details_recycler_view)
@@ -40,8 +44,8 @@ public class TeamStatsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        teamId = intent.getStringExtra("id");
-        teamNameStr = intent.getStringExtra("team");
+        teamId = intent.getStringExtra(ID_CONST);
+        teamNameStr = intent.getStringExtra(TEAM_CONST);
         teamName.setText(teamNameStr);
 
         RetrofitHelper.initializeRetrofit();
@@ -54,15 +58,15 @@ public class TeamStatsActivity extends AppCompatActivity {
     }
 
     public void getTeamResults(){
-        RetrofitHelper.soccerApi.getTeamStats(league, LeaguesConstants.CURRENT_SEASON, teamId).enqueue(new Callback<MatchData>() {
+        RetrofitHelper.soccerApi.getTeamStats(league, CURRENT_SEASON, teamId).enqueue(new Callback<MatchData>() {
             @Override
-            public void onResponse(Call<MatchData> call, Response<MatchData> response) {
+            public void onResponse(@NonNull Call<MatchData> call, @NonNull Response<MatchData> response) {
                 if(response.body() != null)
                     recyclerView.setAdapter(new TeamStatsAdapter(response.body()));
             }
 
             @Override
-            public void onFailure(Call<MatchData> call, Throwable t) {
+            public void onFailure(@NonNull Call<MatchData> call, @NonNull Throwable t) {
 
             }
         });

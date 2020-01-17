@@ -20,15 +20,19 @@ import com.example.soccerstats.model.standings.StandingsData;
 import com.example.soccerstats.view.activities.StandingsActivity;
 import com.example.soccerstats.view.activities.TeamStatsActivity;
 
+import static com.example.soccerstats.util.Constants.ID_CONST;
+import static com.example.soccerstats.util.Constants.LEAGUE_CONST;
+import static com.example.soccerstats.util.Constants.TEAM_CONST;
+
 public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.CustomViewHolder> {
 
     public static final String TAG = StandingsAdapter.class.getSimpleName();
 
-    public static StandingList dataSet;
+    private StandingList dataSet;
 
     private Context context;
 
-    static String teamIdentifier;
+    //private static String teamIdentifier;
 
     private int lastPosition = -1;
 
@@ -65,12 +69,12 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
 
         setAnimation(customViewHolder.cardView, position);
 
-        teamIdentifier = dataSet.getStandings().get(position).getTeamIdentifier();
+        //String teamIdentifier = dataSet.getStandings().get(position).getTeamIdentifier();
         Log.d(TAG, "onBindViewHolder: " + dataSet.getStandings().get(position).getTeamIdentifier());
     }
 
-    private void setAnimation(View viewToAnimate, int position){
-        if(position > lastPosition){
+    private void setAnimation(View viewToAnimate, int position) {
+        if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
@@ -80,7 +84,7 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
     @Override
     public void onViewDetachedFromWindow(@NonNull CustomViewHolder holder) {
         //super.onViewDetachedFromWindow(holder);
-        ((CustomViewHolder)holder).itemView.clearAnimation();
+        (holder).itemView.clearAnimation();
     }
 
     @Override
@@ -88,12 +92,12 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
         return dataSet.getStandings().size();
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPosition, tvTeamName, tvPoints, tvGoalDiff, tvId;
         CardView cardView;
 
-        public CustomViewHolder(@NonNull View itemView) {
+        CustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
             context = itemView.getContext();
@@ -107,18 +111,16 @@ public class StandingsAdapter extends RecyclerView.Adapter<StandingsAdapter.Cust
 
             cardView = itemView.findViewById(R.id.card_view);
 
-            cardView.setOnClickListener(new View.OnClickListener() {
+            cardView.setOnClickListener(v -> {
 
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "onClick: " + tvId.getText().toString());
-                    Intent intent = new Intent(context, TeamStatsActivity.class);
-                    intent.putExtra("id", tvId.getText().toString());
-                    intent.putExtra("team", tvTeamName.getText().toString());
-                    intent.putExtra("league", StandingsActivity.league);
+                Log.d(TAG, "onClick: " + tvId.getText().toString());
+                Intent intent = new Intent(context, TeamStatsActivity.class);
+                intent.putExtra(ID_CONST, tvId.getText().toString());
+                intent.putExtra(TEAM_CONST, tvTeamName.getText().toString());
+                intent.putExtra(LEAGUE_CONST, StandingsActivity.league);
 
-                    context.startActivity(intent);
-                }
+                context.startActivity(intent);
+
             });
         }
     }

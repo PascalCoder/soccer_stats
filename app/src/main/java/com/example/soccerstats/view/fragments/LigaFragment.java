@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.soccerstats.R;
-import com.example.soccerstats.model.RetrofitHelper;
+import com.example.soccerstats.network.RetrofitHelper;
 import com.example.soccerstats.model.standings.StandingsData;
 import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.adapters.StandingsAdapter;
