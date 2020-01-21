@@ -1,10 +1,11 @@
 package com.example.soccerstats.model;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
 public class Gamer implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull private Integer id;
+    @NonNull
+    private Integer id;
     private String username;
     private String password;
     private int previousScore;

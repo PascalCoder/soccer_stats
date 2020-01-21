@@ -1,8 +1,8 @@
 package com.example.soccerstats.view.adapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.soccerstats.util.LeaguesConstants;
 import com.example.soccerstats.view.activities.MainActivity_2;

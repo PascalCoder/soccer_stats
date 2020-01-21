@@ -1,7 +1,8 @@
 package com.example.soccerstats.repository;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+
+import androidx.lifecycle.LiveData;
 
 import com.example.soccerstats.model.rounds.Match;
 

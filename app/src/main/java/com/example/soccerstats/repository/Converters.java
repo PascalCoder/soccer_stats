@@ -1,6 +1,6 @@
 package com.example.soccerstats.repository;
 
-import android.arch.persistence.room.TypeConverter;
+import androidx.room.TypeConverter;
 
 import com.example.soccerstats.model.Bet;
 import com.google.gson.Gson;
