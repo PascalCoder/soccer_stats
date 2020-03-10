@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.soccerstats">
+    package="com.thepascal.soccerstats">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,18 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.BetListActivity"></activity>
-        <activity android:name=".view.activities.StandingsActivity" />
-        <activity android:name=".view.activities.MainActivity">
+        <activity android:name="com.thepascal.soccerstats.view.activities.BetListActivity"></activity>
+        <activity android:name="com.thepascal.soccerstats.view.activities.StandingsActivity" />
+        <activity android:name="com.thepascal.soccerstats.view.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.BetActivity" />
-        <activity android:name=".view.activities.TeamStatsActivity" />
-        <activity android:name=".view.activities.MainActivity_2" />
+        <activity android:name="com.thepascal.soccerstats.view.activities.BetActivity" />
+        <activity android:name="com.thepascal.soccerstats.view.activities.TeamStatsActivity" />
+        <activity android:name="com.thepascal.soccerstats.view.activities.MainActivity_2" />
     </application>
 
 </manifest> <!-- launcher -->
