@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_liga"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -63,9 +64,9 @@
                     android:gravity="center"
                     android:text="LA LIGA" />
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_premier_league"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -80,7 +81,7 @@
                     android:gravity="center"
                     android:text="PREMIER LEAGUE" />
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <LinearLayout
@@ -90,7 +91,7 @@
             android:layout_below="@id/ll_top"
             android:padding="5dp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_bundesliga"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -105,9 +106,9 @@
                     android:gravity="center"
                     android:text="BUNDESLIGA" />
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_serie_a"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -122,8 +123,8 @@
                     android:gravity="center"
                     android:text="SERIE A" />
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
