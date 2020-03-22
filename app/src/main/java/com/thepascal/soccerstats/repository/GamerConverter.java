@@ -26,17 +26,17 @@ public class GamerConverter {
         return json;
     }
 
-    @TypeConverter
-    static <T> T fromTString(String value) {
+    /*@TypeConverter
+    public static <T extends Gamer> T fromTString(String value) {
         Type listType = new TypeToken<T>(){}.getType();
 
         return new Gson().fromJson(value, listType);
     }
 
     @TypeConverter
-    static <T> String fromTypeT(T t){
+    public static <T extends Gamer> String fromTypeT(T t){
         Gson gson = new Gson();
 
         return gson.toJson(t);
-    }
+    }*/
 }
